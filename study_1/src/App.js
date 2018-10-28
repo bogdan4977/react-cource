@@ -1,44 +1,26 @@
 import React, { Component } from 'react';
 
 class App extends Component {
-  // constructor() {
-  //   super();
-  // }
-  state = { time: null };
+    state = { name: '' };
 
-  getValues = date => {
-    const hh = date.getHours();
-    const mm = date.getMinutes();
-    const ss = date.getSeconds();
+    handleChangeName = ({ target }) => {
+        const { value } = target;
 
-    return [hh, mm, ss];
-  };
+        this.setState({ name: value });
+    };
 
-  getTime = () => {
-    const date = new Date();
-    const [hours, minutes, seconds] = this.getValues(date);
-    // const time = this.getNormalResult(hours, minutes, seconds);
 
-    // this.setState({ time });
+    render() {
+        const { name } = this.state;
 
-    this.setState({
-      time: `${hours}:${minutes < 10 ? `0${minutes}` : minutes}:${
-        seconds < 10 ? `0${seconds}` : seconds
-      }`,
-    });
-  };
-
-  render() {
-    const { time } = this.state;
-
-    return (
-      <div>
-        <p>Current time is {time ? time : '00:00:00'}</p>
-        <button onClick={this.getTime}>Get Time!</button>
-      </div>
-    );
-  }
+        return (
+            <div>
+                <input id='name' type='text' value={name ? name : 'guest'} onChange={this.handleChangeName} />
+                <p>Hello, {name ? name :  'guest' }</p>
+                <p>{this.justText}</p>
+            </div>
+        );
+    }
 }
 
 export default App;
-
